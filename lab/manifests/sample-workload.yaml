@@ -1,0 +1,42 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: etcd-lab
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: demo-settings
+  namespace: etcd-lab
+data:
+  mode: learning-lab
+  owner: platform-engineering
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web-demo
+  namespace: etcd-lab
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: web-demo
+  template:
+    metadata:
+      labels:
+        app: web-demo
+    spec:
+      containers:
+        - name: web
+          image: nginx:1.27
+          ports:
+            - name: http
+              containerPort: 80
+          resources:
+            requests:
+              cpu: 25m
+              memory: 32Mi
+            limits:
+              cpu: 100m
+              memory: 64Mi
