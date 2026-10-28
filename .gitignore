@@ -1,0 +1,12 @@
+# Local etcd backups and generated restore data
+backups/
+*.db
+*.db.*
+*.snap
+*.snapshot
+
+# Local kubeconfigs, credentials, and environment overrides
+*.kubeconfig
+.env
+.env.*
+!*.env.example
